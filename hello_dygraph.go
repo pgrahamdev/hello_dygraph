@@ -8,16 +8,18 @@ import (
 	"time"
 )
 
-var myString string = "Date, Temp\n"
+var csvString string = "Date, Temp\n"
+
+const templateFile string = "dygraph.html"
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("dygraph.html")
+	t, err := template.ParseFiles(templateFile)
 	if err != nil {
-		log.Fatal("Could not parse template file: dygraph,html")
+		log.Fatal("Could not parse template file: " + templateFile)
 	}
-	//fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+
 	myTime := time.Now()
-	tmpString := myString
+	tmpString := csvString
 	for i := 0; i < 100; i++ {
 		tmpString = tmpString + fmt.Sprintf("%s, %d\n", myTime.Add(time.Hour*time.Duration(24*i)).Format("01/02/2006"), i*2)
 	}
