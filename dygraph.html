@@ -1,7 +1,7 @@
 <html>
 <head>
 <script type="text/javascript" src="/assets/dygraph.js"></script>
-<link rel="stylesheet" src="/assets/dygraph.css" />
+<link rel="stylesheet" type="text/css" href="/assets/dygraph.css" />
 </head>
 <body>
 <div id="graphdiv"></div>
@@ -13,7 +13,11 @@
     document.getElementById("graphdiv"),
 
     // CSV or path to a CSV file.
-    data
+    data, {
+      legend: 'always',
+      title: 'Predicted Temperatures',
+      ylabel: 'Temperatures (F)'
+    }
   );
 </script>
 </body>

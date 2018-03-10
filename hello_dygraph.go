@@ -5,12 +5,14 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
 var csvString string = "Date, Temp\n"
 
 const templateFile string = "dygraph.html"
+const portNum int = 8000
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles(templateFile)
@@ -29,5 +31,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", rootHandler)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	fmt.Printf("Server listening at http://localhost:%d\n", portNum)
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(portNum), nil))
 }
