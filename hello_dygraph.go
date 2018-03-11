@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"math/rand"
 	"net/http"
 	"strconv"
 	"time"
@@ -23,7 +24,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	myTime := time.Now()
 	tmpString := csvString
 	for i := 0; i < 100; i++ {
-		tmpString = tmpString + fmt.Sprintf("%s, %d\n", myTime.Add(time.Hour*time.Duration(24*i)).Format("01/02/2006"), i*2)
+		tmpString = tmpString + fmt.Sprintf("%s, %f\n", myTime.Add(time.Hour*time.Duration(24*i)).Format("01/02/2006"), rand.Float32()*100)
 	}
 	t.Execute(w, tmpString)
 }
